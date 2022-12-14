@@ -3,7 +3,8 @@
 #include <bitset>
 
 int main() {
-  std::fstream file("../Input/a.bin", std::ios::in | std::ios::binary);
+  std::fstream file("a.out", std::ios::in | std::ios::binary);
+  std::ofstream output("test.txt");
 
   char buffer[39000];
   file.read(buffer, 39000);
@@ -12,10 +13,11 @@ int main() {
 
   for (int i = 0; i < 39000; i++) {
     std::bitset<8> bits(buffer[i]);
-    std::cout << bits.to_string() << " ";
+    output << bits.to_string() << " ";
   }
 
   file.close();
+  output.close();
 
   return 0;
 }

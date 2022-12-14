@@ -64,7 +64,19 @@ public class Main implements ActionListener {
     }
 
     private static void ReadBinary() {
-        GenerateBrainFuckCode();
+        try {
+            Process code = Runtime.getRuntime().exec("g++ ReadBinary.cpp");
+            code.waitFor();
+
+            Process output = Runtime.getRuntime().exec("./a.out");
+            output.waitFor();
+
+            GenerateBrainFuckCode();
+        }
+
+        catch (Exception e) {
+            System.out.println("An error occurred: " + e.getLocalizedMessage());
+        }
     }
 
     private static void GenerateBrainFuckCode() {
