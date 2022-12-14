@@ -1,6 +1,7 @@
 import javax.swing.*;
 import java.awt.event.*;
-import java.io.FileWriter;
+
+import java.io.*;
 
 public class Main implements ActionListener {
 
@@ -51,12 +52,22 @@ public class Main implements ActionListener {
             cppFile.write(input.getText());
             cppFile.close();
 
-            Process code = Runtime.getRuntime().exec("g++ code.cpp -o function");
+            Process code = Runtime.getRuntime().exec("g++ code.cpp");
             code.waitFor();
+
+            ReadBinary();
         }
 
         catch (Exception e) {
             System.out.println("An error occurred: " + e.getLocalizedMessage());
         }
+    }
+
+    private static void ReadBinary() {
+        GenerateBrainFuckCode();
+    }
+
+    private static void GenerateBrainFuckCode() {
+
     }
 }
