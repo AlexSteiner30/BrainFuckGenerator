@@ -2,6 +2,7 @@ import javax.swing.*;
 import java.awt.event.*;
 
 import java.io.*;
+import java.lang.Math;
 
 public class Main implements ActionListener {
 
@@ -84,19 +85,22 @@ public class Main implements ActionListener {
             BufferedReader input = new BufferedReader(new FileReader("input.txt"));
             FileWriter output = new FileWriter("brainfuck.bf");
 
-            char nextChar;
             String line;
 
             while ((line = input.readLine()) != null) {
-                for (int j = 0; j <= line.length() - 8; j += 9) {
-                    nextChar = (char) Integer.parseInt(line.substring(j, j + 8), 2);
-
-                    for (int k = 0; k < (int) nextChar; k++) {
-                        output.write("+");
-                    }
-
-                    output.write(".>");
+                int nextChar = 0;
+                System.out.println("Line length: " + line.length());
+                for (int j = line.length() - 1; j > 0; j--) {
+                    nextChar += Math.pow(2, j - 1) * Integer.parseInt(String.valueOf(line.charAt(j)));
                 }
+
+                System.out.println(nextChar);
+
+                for (int k = 0; k < nextChar; k++) {
+                    output.write("+");
+                }
+
+                output.write(".>");
             }
 
             input.close();
