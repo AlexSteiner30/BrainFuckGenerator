@@ -89,12 +89,11 @@ public class Main implements ActionListener {
 
             while ((line = input.readLine()) != null) {
                 int nextChar = 0;
-                System.out.println("Line length: " + line.length());
+
                 for (int j = line.length() - 1; j > 0; j--) {
                     nextChar += Math.pow(2, j - 1) * Integer.parseInt(String.valueOf(line.charAt(j)));
+                    System.out.println(line);
                 }
-
-                System.out.println(nextChar);
 
                 for (int k = 0; k < nextChar; k++) {
                     output.write("+");
