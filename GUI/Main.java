@@ -80,6 +80,32 @@ public class Main implements ActionListener {
     }
 
     private static void GenerateBrainFuckCode() {
+        try {
+            BufferedReader input = new BufferedReader(new FileReader("input.txt"));
+            FileWriter output = new FileWriter("brainfuck.bf");
+
+            char nextChar;
+            String line;
+
+            while ((line = input.readLine()) != null) {
+                for (int j = 0; j <= line.length() - 8; j += 9) {
+                    nextChar = (char) Integer.parseInt(line.substring(j, j + 8), 2);
+
+                    for (int k = 0; k < (int) nextChar; k++) {
+                        output.write("+");
+                    }
+
+                    output.write(".>");
+                }
+            }
+
+            input.close();
+            output.close();
+        }
+
+        catch (Exception e) {
+            System.out.println("An error occurred: " + e.getLocalizedMessage());
+        }
 
     }
 }

@@ -4,7 +4,7 @@
 
 int main() {
   std::fstream file("a.out", std::ios::in | std::ios::binary);
-  std::ofstream output("test.txt");
+  std::ofstream output("input.txt");
 
   char buffer[39000];
   file.read(buffer, 39000);
@@ -13,7 +13,7 @@ int main() {
 
   for (int i = 0; i < 39000; i++) {
     std::bitset<8> bits(buffer[i]);
-    output << bits.to_string() << " ";
+    output << bits.to_string() << std::endl;
   }
 
   file.close();
