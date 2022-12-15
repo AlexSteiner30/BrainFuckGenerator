@@ -108,9 +108,9 @@ public class Main implements ActionListener {
 
             int count = 0;
             for (int i = 0; i < bytes.length(); i++) {
-                if (bytes.charAt(i) == 'k' && bytes.charAt(i + 1) == 't') {
+                if (bytes.charAt(i) == 'p' && bytes.charAt(i + 1) == 'x') {
                     count = i + 2;
-                    while (bytes.charAt(count) != '$') {
+                    while (bytes.charAt(count) != '(' && bytes.charAt(count + 1) != ',') {
                         System.out.println((int) bytes.charAt(count));
                         for (int k = 0; k < ((int) bytes.charAt(count)); k++) {
                             output.write("+");
