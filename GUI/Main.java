@@ -32,7 +32,7 @@ public class Main implements ActionListener {
         input.setBounds(25, 55, 425, 350);
         button.setBounds(20, 415, 100, 30);
 
-        input.setText("#include <iostream>\n" + "\nint main()\n" + "{\n" + "     return 0;\n" + "}\n");
+        input.setText("#include <iostream>\n" + "int main()\n" + "{\n" + "     return 0;\n" + "}\n");
 
         // Add Componnets
         frame.add(label);
