@@ -91,18 +91,20 @@ public class Main implements ActionListener {
                 String line = input.nextLine();
                 int nextChar = 0;
 
-                for (int j = line.length() - 1; j > 0; j--) {
-                    nextChar += Math.pow(2, j - 1) * Integer.parseInt(String.valueOf(line.charAt(j)));
+                int j = 8;
+                while (j != 0) {
+                    if (line.charAt(8 - j) == '1') {
+                        nextChar += Math.pow(2, j - 1);
+                    }
+                    j--;
                 }
-
-                System.out.println("Line " + line + " is: " + nextChar);
 
                 for (int k = 0; k < nextChar; k++) {
                     output.write("+");
                 }
-            }
 
-            output.write(".>");
+                output.write(".>");
+            }
 
             input.close();
             output.close();
