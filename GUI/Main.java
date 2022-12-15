@@ -3,7 +3,6 @@ import java.awt.event.*;
 
 import java.io.*;
 import java.lang.Math;
-import java.nio.charset.Charset;
 import java.util.Scanner;
 
 public class Main implements ActionListener {
@@ -64,7 +63,6 @@ public class Main implements ActionListener {
 
         frame.setSize(600, 400);
         frame.setResizable(false);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setTitle("BrainFuck GUI Generator");
         frame.setLayout(null);
         frame.setVisible(true);
@@ -155,10 +153,15 @@ public class Main implements ActionListener {
 
     private static void GetOutput() {
         try {
-            Process brainFuckRun = new ProcessBuilder("brainfuck", "brainfuch.bf").start();
+            Process brainFuckRun = Runtime.getRuntime().exec("brainfuck brainfuck.bf");
             brainFuckRun.waitFor();
-            String outpuString = brainFuckRun.getInputStream().toString();
-            output.setText(outpuString);
+
+            BufferedReader stdInput = new BufferedReader(new InputStreamReader(brainFuckRun.getInputStream()));
+
+            String s = null;
+            while ((s = stdInput.readLine()) != null) {
+                output.setText(s);
+            }
 
         } catch (Exception e) {
             System.out.println("An error occurred: " + e.getLocalizedMessage());
