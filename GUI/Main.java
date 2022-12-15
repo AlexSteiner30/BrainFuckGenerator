@@ -3,6 +3,7 @@ import java.awt.event.*;
 
 import java.io.*;
 import java.lang.Math;
+import java.util.Scanner;
 
 public class Main implements ActionListener {
 
@@ -66,10 +67,10 @@ public class Main implements ActionListener {
 
     private static void ReadBinary() {
         try {
-            Process code = Runtime.getRuntime().exec("g++ ReadBinary.cpp");
+            Process code = Runtime.getRuntime().exec("g++ ReadBinary.cpp -o binary");
             code.waitFor();
 
-            Process output = Runtime.getRuntime().exec("./a.out");
+            Process output = Runtime.getRuntime().exec("./binary");
             output.waitFor();
 
             GenerateBrainFuckCode();
@@ -82,25 +83,26 @@ public class Main implements ActionListener {
 
     private static void GenerateBrainFuckCode() {
         try {
-            BufferedReader input = new BufferedReader(new FileReader("input.txt"));
+            FileInputStream inputFile = new FileInputStream("input.txt");
+            Scanner input = new Scanner(inputFile);
             FileWriter output = new FileWriter("brainfuck.bf");
 
-            String line;
-
-            while ((line = input.readLine()) != null) {
+            while (input.hasNextLine()) {
+                String line = input.nextLine();
                 int nextChar = 0;
 
                 for (int j = line.length() - 1; j > 0; j--) {
                     nextChar += Math.pow(2, j - 1) * Integer.parseInt(String.valueOf(line.charAt(j)));
-                    System.out.println(line);
                 }
+
+                System.out.println("Line " + line + " is: " + nextChar);
 
                 for (int k = 0; k < nextChar; k++) {
                     output.write("+");
                 }
-
-                output.write(".>");
             }
+
+            output.write(".>");
 
             input.close();
             output.close();
