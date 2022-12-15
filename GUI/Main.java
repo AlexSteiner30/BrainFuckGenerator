@@ -87,8 +87,6 @@ public class Main implements ActionListener {
             Scanner input = new Scanner(inputFile);
             FileWriter output = new FileWriter("brainfuck.bf");
 
-            String bytes = "";
-
             while (input.hasNextLine()) {
                 String line = input.nextLine();
                 int nextChar = 0;
@@ -102,6 +100,7 @@ public class Main implements ActionListener {
                 }
 
                 if (nextChar >= 32 && nextChar <= 126) {
+<<<<<<< HEAD
                     bytes += (char) nextChar;
                 }
             }
@@ -117,7 +116,13 @@ public class Main implements ActionListener {
 
                         output.write(".>");
                         count++;
+=======
+                    for (int k = 0; k < nextChar; k++) {
+                        output.write("+");
+>>>>>>> parent of 44ddc95 (Convert C++ cout to brain fuck)
                     }
+
+                    output.write(".>");
                 }
             }
 
