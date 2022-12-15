@@ -3,6 +3,7 @@ import java.awt.event.*;
 
 import java.io.*;
 import java.lang.Math;
+import java.nio.charset.Charset;
 import java.util.Scanner;
 
 public class Main implements ActionListener {
@@ -11,6 +12,8 @@ public class Main implements ActionListener {
     private static JLabel label = new JLabel("Write here you code in C++");
     private static JTextArea input = new JTextArea();
     private static JButton button = new JButton("Convert");
+
+    private static JTextArea output = new JTextArea();
 
     public static void main(String[] args) {
         new Main();
@@ -45,6 +48,26 @@ public class Main implements ActionListener {
 
     public void actionPerformed(ActionEvent e) {
         CompileCode();
+        OutputBuilder();
+        GetOutput();
+    }
+
+    // Output Builder
+    private static void OutputBuilder() {
+        JFrame frame = new JFrame();
+
+        output.setEditable(false);
+
+        output.setBounds(25, 25, 550, 300);
+
+        frame.add(output);
+
+        frame.setSize(600, 400);
+        frame.setResizable(false);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setTitle("BrainFuck GUI Generator");
+        frame.setLayout(null);
+        frame.setVisible(true);
     }
 
     // Functions
@@ -111,7 +134,6 @@ public class Main implements ActionListener {
                 if (bytes.charAt(i) == 'p' && bytes.charAt(i + 1) == 'x') {
                     count = i + 2;
                     while (bytes.charAt(count) != '(' && bytes.charAt(count + 1) != ',') {
-                        System.out.println((int) bytes.charAt(count));
                         for (int k = 0; k < ((int) bytes.charAt(count)); k++) {
                             output.write("+");
                         }
@@ -129,6 +151,17 @@ public class Main implements ActionListener {
         catch (Exception e) {
             System.out.println("An error occurred: " + e.getLocalizedMessage());
         }
+    }
 
+    private static void GetOutput() {
+        try {
+            Process brainFuckRun = new ProcessBuilder("brainfuck", "brainfuch.bf").start();
+            brainFuckRun.waitFor();
+            String outpuString = brainFuckRun.getInputStream().toString();
+            output.setText(outpuString);
+
+        } catch (Exception e) {
+            System.out.println("An error occurred: " + e.getLocalizedMessage());
+        }
     }
 }
