@@ -87,6 +87,8 @@ public class Main implements ActionListener {
             Scanner input = new Scanner(inputFile);
             FileWriter output = new FileWriter("brainfuck.bf");
 
+            String bytes = "";
+
             while (input.hasNextLine()) {
                 String line = input.nextLine();
                 int nextChar = 0;
@@ -100,11 +102,23 @@ public class Main implements ActionListener {
                 }
 
                 if (nextChar >= 32 && nextChar <= 126) {
-                    for (int k = 0; k < nextChar; k++) {
-                        output.write("+");
-                    }
+                    bytes += (char) nextChar;
+                }
+            }
 
-                    output.write(".>");
+            int count = 0;
+            for (int i = 0; i < bytes.length(); i++) {
+                if (bytes.charAt(i) == 'k' && bytes.charAt(i + 1) == 't') {
+                    count = i + 2;
+                    while (bytes.charAt(count) != '$') {
+                        System.out.println((int) bytes.charAt(count));
+                        for (int k = 0; k < ((int) bytes.charAt(count)); k++) {
+                            output.write("+");
+                        }
+
+                        output.write(".>");
+                        count++;
+                    }
                 }
             }
 
