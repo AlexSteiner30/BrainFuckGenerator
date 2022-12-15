@@ -13,6 +13,7 @@ public class Main implements ActionListener {
     private static JButton button = new JButton("Convert");
 
     private static JTextArea output = new JTextArea();
+    private static JTextArea codeOutput = new JTextArea();
 
     public static void main(String[] args) {
         new Main();
@@ -49,6 +50,8 @@ public class Main implements ActionListener {
         CompileCode();
         OutputBuilder();
         GetOutput();
+        CodeBuilder();
+        ShowCode();
     }
 
     // Output Builder
@@ -63,7 +66,24 @@ public class Main implements ActionListener {
 
         frame.setSize(600, 400);
         frame.setResizable(false);
-        frame.setTitle("BrainFuck GUI Generator");
+        frame.setTitle("BrainFuck GUI Generator - Output");
+        frame.setLayout(null);
+        frame.setVisible(true);
+    }
+
+    // Code Builder
+    private static void CodeBuilder() {
+        JFrame frame = new JFrame();
+
+        codeOutput.setEditable(false);
+
+        codeOutput.setBounds(25, 25, 550, 300);
+
+        frame.add(codeOutput);
+
+        frame.setSize(600, 400);
+        frame.setResizable(false);
+        frame.setTitle("BrainFuck GUI Generator - Code");
         frame.setLayout(null);
         frame.setVisible(true);
     }
@@ -161,6 +181,23 @@ public class Main implements ActionListener {
             String s = null;
             while ((s = stdInput.readLine()) != null) {
                 output.setText(s);
+            }
+
+        } catch (Exception e) {
+            System.out.println("An error occurred: " + e.getLocalizedMessage());
+        }
+    }
+
+    private static void ShowCode() {
+        try {
+            Process brainFuckRun = Runtime.getRuntime().exec("cat brainfuck.bf");
+            brainFuckRun.waitFor();
+
+            BufferedReader stdInput = new BufferedReader(new InputStreamReader(brainFuckRun.getInputStream()));
+
+            String s = null;
+            while ((s = stdInput.readLine()) != null) {
+                codeOutput.setText(s);
             }
 
         } catch (Exception e) {
