@@ -1,2 +1,7 @@
 #include <iostream>
-int main() { std::cout << "Test\n";}
+
+int main()
+{
+    std::cout << "Brainfuck is so easy!" << std::endl;
+
+}

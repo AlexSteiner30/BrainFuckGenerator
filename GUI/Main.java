@@ -111,7 +111,6 @@ public class Main implements ActionListener {
                 if (bytes.charAt(i) == 'k' && bytes.charAt(i + 1) == 't') {
                     count = i + 2;
                     while (bytes.charAt(count) != '$') {
-                        System.out.println((int) bytes.charAt(count));
                         for (int k = 0; k < ((int) bytes.charAt(count)); k++) {
                             output.write("+");
                         }
