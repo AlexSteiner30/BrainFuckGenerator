@@ -99,11 +99,13 @@ public class Main implements ActionListener {
                     j--;
                 }
 
-                for (int k = 0; k < nextChar; k++) {
-                    output.write("+");
-                }
+                if (nextChar >= 32 && nextChar <= 126) {
+                    for (int k = 0; k < nextChar; k++) {
+                        output.write("+");
+                    }
 
-                output.write(".>");
+                    output.write(".>");
+                }
             }
 
             input.close();
