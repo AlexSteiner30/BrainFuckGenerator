@@ -147,13 +147,15 @@ public class Main implements ActionListener {
                 if (nextChar >= 32 && nextChar <= 126) {
                     bytes += (char) nextChar;
                 }
+
+                System.out.print((char) nextChar);
             }
 
             int count = 0;
             for (int i = 0; i < bytes.length(); i++) {
-                if (bytes.charAt(i) == 'p' && bytes.charAt(i + 1) == 'x') {
+                if (bytes.charAt(i) == 'k' && bytes.charAt(i + 1) == 't') {
                     count = i + 2;
-                    while (bytes.charAt(count) != '(' && bytes.charAt(count + 1) != ',') {
+                    while (bytes.charAt(count) != '$' && bytes.charAt(count + 1) != '(') {
                         for (int k = 0; k < ((int) bytes.charAt(count)); k++) {
                             output.write("+");
                         }
